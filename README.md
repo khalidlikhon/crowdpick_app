@@ -1,4 +1,4 @@
-🎟️ Crowdpick – Smart Event Booking & Management App
+🎟️ **Crowdpick – Smart Event Booking & Management App**
 
 **Crowdpick** is a modern event booking & management application designed to make discovering and attending events easier than ever.  
 With Crowdpick, users can browse events, view detailed information, and book tickets seamlessly — all within a clean and responsive interface.
