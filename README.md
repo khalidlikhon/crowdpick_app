@@ -9,7 +9,6 @@ The app is built for **two types of users**:
 
 ---
 
-## 📄 Version
 **UI-Only Build – Assignment Week (Phase 2)**  
 > Backend logic and API integrations will be added in later development phases.
 
