@@ -1,16 +1,41 @@
-# crowdpick_app
+🎟️ **Crowdpick – Smart Event Booking & Management App**
 
-A new Flutter project.
+**Crowdpick** is a modern event booking & management application designed to make discovering and attending events easier than ever.  
+With Crowdpick, users can browse events, view detailed information, and book tickets seamlessly — all within a clean and responsive interface.
 
-## Getting Started
+The app is built for **two types of users**:
+1. **Normal User** – Browse events, view details, and purchase tickets.
+2. **Organizer** – Create and manage events (to be implemented in future phases).
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+**UI-Only Build – Assignment Week (Phase 2)**  
+> Backend logic and API integrations will be added in later development phases.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📌 Current Features (UI Only)
+- **Home Screen**  
+  - Displays event list and promotional banners  
+  - Search bar (UI only, no backend)  
+  - Scrollable list of event view cards  
+- **Event Details Screen**  
+  - Large event cover image and description  
+  - Ticket types with pricing  
+  - **Custom Ticket Card widget** for a clean display  
+- **My Tickets Screen**  
+  - List of purchased tickets  
+  - Ticket details: event name, date, and location  
+  - Ticket status display (Active, Used, Canceled, etc.)  
+- **Profile Screen**  
+  - User name, profile picture, and basic information (UI only)  
+- **Custom Widgets**  
+  - `EventViewCard` – Reusable card for displaying events  
+  - `TicketCard` – Ticket information card for event details  
+  - Reusable text fields (including `TextFormField` for input), buttons, and various small reusable styled components   
+- **Responsive Layout** – Adapts seamlessly to various mobile screen sizes  
+- **Consistent Theme & Color Palette** – Ensuring a polished and cohesive UI  
+
+---
+
+*This build focuses solely on delivering a functional and visually appealing UI for demonstration purposes during the assignment week. All interactions are powered by static data, with backend features planned for upcoming phases.*
