@@ -53,7 +53,7 @@ class appCustomBottomNavBar extends StatelessWidget {
                 } else if (index == 1) {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) =>  myticketScreen()),
+                    MaterialPageRoute(builder: (context) =>  myTicketScreen()),
                   );
                 } else if (index == 2) {
                   Navigator.pushReplacement(

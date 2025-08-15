@@ -1,175 +1,130 @@
-import 'package:crowdpick_app/component/static_styles.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
+import 'package:crowdpick_app/component/static_styles.dart';
 import '../component/_customWidgets/textFormField.dart';
 import '../component/authGuide.dart';
+import 'controllers/authController.dart';
 
-class singUpScreen extends StatefulWidget {
-  @override
-  State<singUpScreen> createState() => _singUpScreenState();
-}
-
-class _singUpScreenState extends State<singUpScreen> {
-  bool onClick = false;
+class singUpScreen extends StatelessWidget {
+  const singUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final c = Get.put(SignupController());
+
     return Scaffold(
       backgroundColor: appBackgroundColor,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(height: 30),
-            Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Crowd',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  Text(
-                    'pick',
-                    style: TextStyle(
-                      color: Color(0xFF95E143),
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-              ),
+            const SizedBox(height: 30),
+            // Title
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text('Crowd', style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.w700)),
+                Text('pick', style: TextStyle(color: Color(0xFF95E143), fontSize: 25, fontWeight: FontWeight.w700)),
+              ],
             ),
-            SizedBox(height: 30),
-
+            const SizedBox(height: 30),
             RegistrationGuide,
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
+            // Social buttons
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                  Expanded(
-                    child: socialIconButton(
-                      iconPath: '/icons/googleIcon.png',
-                      onTap: () {},
-                    ),
-                  ),
-                  SizedBox(width: 20),
-                  Expanded(
-                    child: socialIconButton(
-                      iconPath: '/icons/facebookIcon.png',
-                      onTap: () {},
-                    ),
-                  ),
+                  Expanded(child: socialIconButton(iconPath: '/icons/googleIcon.png', onTap: () {})),
+                  const SizedBox(width: 20),
+                  Expanded(child: socialIconButton(iconPath: '/icons/facebookIcon.png', onTap: () {})),
                 ],
               ),
             ),
 
-            SizedBox(height: 18),
+            const SizedBox(height: 18),
             alternetGuide,
-            SizedBox(height: 28),
+            const SizedBox(height: 28),
 
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+            // Form
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Full Name', style: TextStyle(color: Color(0xFFB0B0B0))),
-                  SizedBox(height: 6),
-                  costomFormField(
-                    hintText: 'Your full name',
-                    onChanged: (String value) {  },
-                  ),
-                  SizedBox(height: 11),
+                  const Text('Full Name', style: TextStyle(color: Color(0xFFB0B0B0))),
+                  const SizedBox(height: 6),
+                  costomFormField(hintText: 'Your full name', onChanged: (v) {}),
 
-                  // Side-by-side email + phone
+                  const SizedBox(height: 11),
+                  // Side-by-side Email + Phone
                   Row(
                     children: [
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Email Address', style: TextStyle(color: Color(0xFFB0B0B0))),
-                            SizedBox(height: 6),
-                            costomFormField(
-                              hintText: 'Your email',
-                              onChanged: (String value) {  },
-                            ),
+                            const Text('Email Address', style: TextStyle(color: Color(0xFFB0B0B0))),
+                            const SizedBox(height: 6),
+                            costomFormField(hintText: 'Your email', onChanged: (v) {}),
                           ],
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Phone number', style: TextStyle(color: Color(0xFFB0B0B0))),
-                            SizedBox(height: 6),
-                            costomFormField(
-                              hintText: 'Your Number',
-                              onChanged: (String value) {  },
-                            ),
+                            const Text('Phone number', style: TextStyle(color: Color(0xFFB0B0B0))),
+                            const SizedBox(height: 6),
+                            costomFormField(hintText: 'Your Number', onChanged: (v) {}),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 11),
 
-                  Text('Password', style: TextStyle(color: Color(0xFFB0B0B0))),
-                  SizedBox(height: 6),
-                  costomFormField(
-                    hintText: 'Set a strong password',
-                    obscureText: true, onChanged: (String value) {  },
-                  ),
-                  SizedBox(height: 22),
+                  const SizedBox(height: 11),
+                  const Text('Password', style: TextStyle(color: Color(0xFFB0B0B0))),
+                  const SizedBox(height: 6),
+                  costomFormField(hintText: 'Set a strong password', obscureText: true, onChanged: (v) {}),
 
-                  SizedBox(
+                  const SizedBox(height: 22),
+
+                  // Sign Up Button
+                  Obx(() => SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: onClick ? Color(0xFF95E143) : Color(0xFF212121),
+                        backgroundColor: c.onClick.value ? const Color(0xFF95E143) : const Color(0xFF212121),
                         foregroundColor: Colors.black,
-                        padding: EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                       ),
-                      onPressed: () {
-                        setState(() {
-                          onClick = true;
-                          Navigator.pushNamedAndRemoveUntil(context, '/loginScreen', (route)=>false);
-                        });
-                      },
+                      onPressed: c.signup,
                       child: Text(
                         'Sign Up',
                         style: TextStyle(
-                          color: onClick ? Colors.black : Colors.white,
+                          color: c.onClick.value ? Colors.black : Colors.white,
                           fontSize: 16,
                         ),
                       ),
                     ),
-                  ),
+                  )),
 
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
+                  // Footer
                   onBoardingFooterText(
                     title: 'have an account? ',
                     buttonName: 'Login',
-                    OnTap: () {
-                      Navigator.pop(context);
-                    },
+                    OnTap: () => Get.back(),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
-
           ],
         ),
       ),

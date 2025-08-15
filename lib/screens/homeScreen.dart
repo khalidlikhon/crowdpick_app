@@ -1,10 +1,12 @@
 import 'package:crowdpick_app/component/_customWidgets/appCustomBottomNav.dart';
+import 'package:crowdpick_app/screens/sateBaseEventScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:crowdpick_app/component/static_styles.dart';
 
 import '../component/_customWidgets/eventScreen_widgets.dart';
 import '../component/_customWidgets/homeScreen_widgets.dart';
 import '../component/dataModel.dart';
+import '../component/demoData.dart';
 import 'clickedEventScreen.dart';
 
 
@@ -66,7 +68,14 @@ class homeScreen extends StatelessWidget {
                   ),
                   /// See All Button
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_)=> SateBaseEventScreen(title: 'Upcoming Events')
+                        ),
+                      );
+                    },
                     child: Text(
                       'See all',
                       style: TextStyle(color: Colors.grey),
@@ -136,7 +145,14 @@ class homeScreen extends StatelessWidget {
                   ),
                   /// See All Button
                   TextButton(
-                    onPressed: () {},
+                    onPressed: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => SateBaseEventScreen(title: 'All Events',),
+                        ),
+                      );
+                    },
                     child: Text(
                       'See all',
                       style: TextStyle(color: Colors.grey),

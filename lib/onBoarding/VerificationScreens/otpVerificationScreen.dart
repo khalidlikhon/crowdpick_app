@@ -1,99 +1,94 @@
-import 'package:crowdpick_app/onBoarding/VerificationScreens/setNewPassword.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../component/authGuide.dart';
-
+import '../controllers/verificationController.dart';
+import 'setNewPassword.dart';
 
 class otpVerificationScreen extends StatelessWidget {
-
-  bool onClick = true;
+  const otpVerificationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Controller instance
+    final controller = Get.put(OtpVerificationController());
+
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SizedBox(height: 30),
-            Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Crowd',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  Text(
-                    'pick',
-                    style: TextStyle(
-                      color: Color(0xFF95E143),
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 30),
+          // Title
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Text(
+                'Crowd',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w700),
               ),
-            ),
-            SizedBox(height: 30),
+              Text(
+                'pick',
+                style: TextStyle(
+                    color: Color(0xFF95E143),
+                    fontSize: 25,
+                    fontWeight: FontWeight.w700),
+              ),
+            ],
+          ),
+          const SizedBox(height: 30),
+          // OTP guide text
+          OTPverificationGuide,
+          const SizedBox(height: 30),
 
-            // TODO just Change this - base Screen
-            OTPverificationGuide,
-            SizedBox(height: 30),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // OTP Field (unchanged)
+                const appOtpField(),
+                const SizedBox(height: 22),
 
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-
-                  //TODO: OTP field
-                  appOtpField(),
-                  SizedBox(height: 22),
-
-                  //TODO: ElevatedButton
-                  SizedBox(
+                // Reactive button using GetX
+                Obx(
+                      () => SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: onClick ? Color(0xFF95E143) : Color(0xFF212121),
-                        foregroundColor: Colors.black, // for ripple/text
-                        padding: EdgeInsets.symmetric(vertical: 16),
+                        backgroundColor: controller.onClick.value
+                            ? const Color(0xFF95E143)
+                            : const Color(0xFF212121),
+                        foregroundColor: Colors.black,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
+                            borderRadius: BorderRadius.circular(8)),
                       ),
-                      onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => setNewPasswordScreen(),
-                          ),
-                        );
-                        onClick = !onClick;
-                      },
+                      onPressed: controller.goToSetNewPassword,
                       child: Icon(
                         Icons.navigate_next_outlined,
-                        color: onClick ? Colors.black : Colors.white,
+                        color: controller.onClick.value
+                            ? Colors.black
+                            : Colors.white,
                         size: 18,
-                      )
+                      ),
                     ),
                   ),
-                ],
-              ),
-            )
-
-
-          ]
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 }
 
-
+// OTP Field Widget (unchanged)
 class appOtpField extends StatelessWidget {
+  const appOtpField({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -105,9 +100,9 @@ class appOtpField extends StatelessWidget {
           height: 55,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: Color(0xFF1E1E1E),
+            color: const Color(0xFF1E1E1E),
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Color(0xFF95E143), width: 1.2),
+            border: Border.all(color: const Color(0xFF95E143), width: 1.2),
           ),
           child: TextField(
             keyboardType: TextInputType.number,
@@ -124,10 +119,10 @@ class appOtpField extends StatelessWidget {
             ),
             onChanged: (value) {
               if (value.length == 1 && index < 5) {
-                FocusScope.of(context).nextFocus(); // move to next box
+                FocusScope.of(context).nextFocus();
               }
               if (value.isEmpty && index > 0) {
-                FocusScope.of(context).previousFocus(); // move to previous box
+                FocusScope.of(context).previousFocus();
               }
             },
           ),

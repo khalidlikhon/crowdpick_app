@@ -19,7 +19,7 @@ class upcomingCard extends StatelessWidget {
     final double width = ResponsiveHelper.cardWidth(context);
 
     return Hero(
-      tag: 'clickedImageOnHero',
+      tag: 'clickedImageOnHero-${event["id"]}',
       child: Container(
         width: width,
         margin: const EdgeInsets.only(left: 16),
@@ -190,7 +190,7 @@ class discoverCard extends StatelessWidget {
                   height: parentHeight * imageRatio,
                   width: double.infinity,
                   child: Hero(
-                    tag: 'clickedImageOnHero',
+                    tag: 'clickedImageOnHero-${event["id"]}',
                     child: Image.network(
                       event['image'] ?? 'https://via.placeholder.com/300x200.png?text=No+Image',
                       fit: BoxFit.cover,
@@ -281,8 +281,6 @@ class discoverCard extends StatelessWidget {
     );
   }
 }
-
-
 
 
 
@@ -381,38 +379,7 @@ class pastEventStorie extends StatelessWidget {
     );
   }
 }
-final List<Map<String, String>> pastEventList = [
-  {
-    'title': 'Tech Spark 1.0',
-    'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw96S-WizocBl1rDlX6Nxj5rOpfVHqkCfOrBpSV8Jlo2rMXFNijO4_ALyjzFL3M0cIqKs&usqp=CAU',
-    'organizer': 'TechBD Ltd.',
-  },
-  {
-    'title': 'Startup Dhaka Summit',
-    'image': 'https://static.wixstatic.com/media/06a3d1_f2f44d642c5f429981a97c1e211fe8e8~mv2.jpeg/v1/fill/w_752,h_502,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/06a3d1_f2f44d642c5f429981a97c1e211fe8e8~mv2.jpeg',
-    'organizer': 'StartupBangladesh',
-  },
-  {
-    'title': 'Art & Soul Fest',
-    'image': 'https://static.wixstatic.com/media/c9128a_b610ed0837db4d27a0df20e542086683~mv2.jpg/v1/fill/w_1280,h_720,al_c/c9128a_b610ed0837db4d27a0df20e542086683~mv2.jpg',
-    'organizer': 'Canvas BD',
-  },
-  {
-    'title': 'Stand-up Comedy with Mark Smith',
-    'image': 'https://www.shutterstock.com/image-vector/comedy-show-theater-scene-red-600nw-1069556927.jpg',
-    'organizer': 'ComedyLab Ltd.',
-  },
-  {
-    'title': 'Green Fashion Talk',
-    'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQarocAXXJQO-RJpCQv49aNQMmWu4jJGZjhC2xxE3vExzcrZ9axEFdCAOCmjOqfEQ1EqEM&usqp=CAU',
-    'organizer': 'EcoSphere Fashion',
-  },
-  {
-    'title': 'MusicVibe Open Air',
-    'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtnVnQqq0Xn8pantFX7-vqHpIJdF1CPEwhbA&s',
-    'organizer': 'Live Nation BD',
-  },
-];
+
 
 
 

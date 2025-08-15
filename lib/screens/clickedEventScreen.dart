@@ -12,7 +12,6 @@ class clickedEventScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Convert map to EventData for tickets
     final eventData = EventData.fromJson(event);
     final eventIndex = eventDataList.indexWhere((e) =>
     e.eventTitle == eventData.eventTitle &&
@@ -25,7 +24,7 @@ class clickedEventScreen extends StatelessWidget {
         children: [
           Positioned.fill(
             child: Hero(
-              tag: 'clickedImageOnHero',
+              tag: 'clickedImageOnHero-${event["id"]}',
               child: Image.network(
                 event['image']!,
                 fit: BoxFit.cover,
@@ -253,7 +252,7 @@ class _TicketListWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.4),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(8),
         border: Border.all(color: Color(0xFF95E143).withOpacity(0.3), width: 0.5),
       ),
       child: Row(

@@ -4,8 +4,9 @@ import 'package:crowdpick_app/onBoarding/singUpScreen.dart';
 import 'package:crowdpick_app/onBoarding/splash.dart';
 import 'package:crowdpick_app/screens/homeScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import 'onBoarding/organizerAuth.dart';
+import 'onBoarding/organizer_authScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,28 +15,24 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp( // MaterialApp → GetMaterialApp
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         textTheme: ThemeData.dark().textTheme.apply(
           fontFamily: 'Poppins',
         ),
       ),
-
       initialRoute: '/splashScreen',
-      routes: {
-        '/splashScreen': (context)=> splashScreen(),
-        '/homeScreen': (context)=> homeScreen(),
-        '/loginScreen': (context)=> loginScreen(),
-        '/singUpScreen': (context)=> singUpScreen(),
-        '/organizerAuthScreen': (context)=> organizerAuthScreen(),
-        '/forgotPassword': (context)=> emailVerificationScreen(),
-
-
-      },
+      getPages: [
+        GetPage(name: '/splashScreen', page: () => splashScreen()),
+        GetPage(name: '/homeScreen', page: () => homeScreen()),
+        GetPage(name: '/loginScreen', page: () => loginScreen()),
+        GetPage(name: '/singUpScreen', page: () => singUpScreen()),
+        GetPage(name: '/organizerAuthScreen', page: () => OrganizerAuthScreen()),
+        GetPage(name: '/forgotPassword', page: () => emailVerificationScreen()),
+      ],
     );
   }
 }
