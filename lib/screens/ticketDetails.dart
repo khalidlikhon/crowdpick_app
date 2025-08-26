@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class ticketDetailsScreen extends StatelessWidget {
   final Map<String, dynamic> ticket;
   final bool isVerified;
@@ -60,15 +59,19 @@ class ticketDetailsScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8),
                                 child: Image.network(
                                   ticket['ImageUrl'] ?? '',
-                                  width: 76,
-                                  height: 76,
+                                  width: 82,
+                                  height: 89,
                                   fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) => Container(
-                                    width: 76,
-                                    height: 76,
-                                    color: Colors.grey[800],
-                                    child: const Icon(Icons.event, color: Colors.white),
-                                  ),
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Container(
+                                        width: 76,
+                                        height: 76,
+                                        color: Colors.grey[800],
+                                        child: const Icon(
+                                          Icons.event,
+                                          color: Colors.white,
+                                        ),
+                                      ),
                                 ),
                               ),
                               const SizedBox(width: 15),
@@ -76,36 +79,62 @@ class ticketDetailsScreen extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    // Organizer + Verified (first line)
                                     Row(
                                       children: [
-                                        if (isVerified)
-                                          const Icon(Icons.verified, size: 12, color: Colors.white54),
-                                        if (isVerified) const SizedBox(width: 4),
-                                        Expanded(
-                                          child: Text(
-                                        '${ticket['organizerName'] ?? ''}\' Presents',
-                                            style: TextStyle(color: Colors.grey.shade400),
+                                        Text(
+                                          '${ticket['organizerName'] ?? ''}',
+                                          style: TextStyle(
+                                            color: Colors.grey.shade400,
+                                            fontSize: 13,
                                           ),
                                         ),
+                                        if (isVerified) ...[
+                                          const SizedBox(width: 4),
+                                          const Icon(
+                                            Icons.verified,
+                                            size: 12,
+                                            color: Colors.white54,
+                                          ),
+                                        ],
                                       ],
                                     ),
+                                    const SizedBox(height: 3),
+
+                                    // Presents (second line)
+                                    Text(
+                                      'Presents',
+                                      style: TextStyle(
+                                        color: Colors.grey.shade400,
+                                        fontSize: 11,
+                                      ),
+                                    ),
                                     const SizedBox(height: 5),
+
+                                    // Event Title
                                     Text(
                                       ticket['title'] ?? '',
                                       style: const TextStyle(
                                         color: Colors.white,
-                                        fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                       ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                    const SizedBox(height: 5),
+
+                                    // Location
                                     Text(
                                       ticket['location'] ?? '',
-                                      style: const TextStyle(color: Colors.grey),
+                                      style: const TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 12,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ],
                                 ),
-                              ),
+                              )
+
                             ],
                           ),
 
@@ -118,17 +147,41 @@ class ticketDetailsScreen extends StatelessWidget {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('Date', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                                  const Text(
+                                    'Date',
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 12,
+                                    ),
+                                  ),
                                   const SizedBox(height: 5),
-                                  Text(ticket['date'] ?? '', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                                  Text(
+                                    ticket['date'] ?? '',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ],
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('Time', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                                  const Text(
+                                    'Time',
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 12,
+                                    ),
+                                  ),
                                   const SizedBox(height: 5),
-                                  Text(ticket['time'] ?? '', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                                  Text(
+                                    ticket['time'] ?? '',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],
@@ -146,11 +199,26 @@ class ticketDetailsScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 15),
 
-                          DetailRow(label: 'Booking Code', value: ticket['bookingCode'] ?? ''),
-                          DetailRow(label: 'Purchase Date', value: ticket['purchaseDate'] ?? ''),
-                          DetailRow(label: 'Quantity', value: '${ticket['quantity'] ?? ''}'),
-                          DetailRow(label: 'Total Price', value: '${ticket['totalPrice'] ?? ''}'),
-                          DetailRow(label: 'Status', value: ticket['status'] ?? ''),
+                          DetailRow(
+                            label: 'Booking Code',
+                            value: ticket['bookingCode'] ?? '',
+                          ),
+                          DetailRow(
+                            label: 'Purchase Date',
+                            value: ticket['purchaseDate'] ?? '',
+                          ),
+                          DetailRow(
+                            label: 'Quantity',
+                            value: '${ticket['quantity'] ?? ''}',
+                          ),
+                          DetailRow(
+                            label: 'Total Price',
+                            value: '${ticket['totalPrice'] ?? ''}',
+                          ),
+                          DetailRow(
+                            label: 'Status',
+                            value: ticket['status'] ?? '',
+                          ),
                           SizedBox(height: 10),
                           Center(
                             child: Container(
@@ -166,7 +234,10 @@ class ticketDetailsScreen extends StatelessWidget {
                                     offset: const Offset(0, 5),
                                   ),
                                 ],
-                                border: Border.all(color: Colors.grey.shade300, width: 1),
+                                border: Border.all(
+                                  color: Colors.grey.shade300,
+                                  width: 1,
+                                ),
                               ),
                               alignment: Alignment.center,
                               child: const Text(
@@ -178,7 +249,6 @@ class ticketDetailsScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-
                         ],
                       ),
                     ),
@@ -206,13 +276,16 @@ class ticketDetailsScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 10),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 5,
+                              vertical: 3,
+                            ),
                             child: Text(
                               '• Tickets are non-refundable\n'
-                                  '• Valid ID required for entry\n'
-                                  '• No re-entry after leaving venue\n'
-                                  '• Event subject to change without notice\n'
-                                  '• Management reserves right to refuse entry',
+                              '• Valid ID required for entry\n'
+                              '• No re-entry after leaving venue\n'
+                              '• Event subject to change without notice\n'
+                              '• Management reserves right to refuse entry',
                               style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 14,
@@ -255,10 +328,7 @@ class DetailRow extends StatelessWidget {
           Text(label, style: const TextStyle(color: Colors.grey)),
           Text(
             value,
-            style: TextStyle(
-              color: valueColor,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(color: valueColor, fontWeight: FontWeight.bold),
           ),
         ],
       ),

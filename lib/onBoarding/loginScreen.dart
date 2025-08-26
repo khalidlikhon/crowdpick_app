@@ -109,9 +109,9 @@ class loginScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Row(
                       children: [
-                        Expanded(child: socialIconButton(iconPath: '/icons/googleIcon.png', onTap: () {})),
+                        Expanded(child: socialIconButton(iconPath: 'assets/icons/googleIcon.png', onTap: () {})),
                         const SizedBox(width: 20),
-                        Expanded(child: socialIconButton(iconPath: '/icons/facebookIcon.png', onTap: () {})),
+                        Expanded(child: socialIconButton(iconPath: 'assets/icons/facebookIcon.png', onTap: () {})),
                       ],
                     ),
                   ),

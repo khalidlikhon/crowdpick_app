@@ -1,5 +1,7 @@
 import 'package:crowdpick_app/component/static_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../component/_customWidgets/appCustomBottomNav.dart';
 import '../component/_customWidgets/profileScreen_widgets.dart';
@@ -68,7 +70,7 @@ class profileScreen extends StatelessWidget {
                                   // Profile Image
                                    CircleAvatar(
                                     radius: 45,
-                                    backgroundImage: AssetImage('/images/userImage.jpg'),
+                                    backgroundImage: AssetImage('assets/images/userImage.jpg'),
                                     backgroundColor: Colors.grey,
                                   ),
                                   const SizedBox(height: 14),
@@ -159,9 +161,7 @@ class profileScreen extends StatelessWidget {
                               SizedBox(height: 16),
                               GestureDetector(
                                 child: _buildProfileItem(Icons.lock, 'Change Password'),
-                                onTap: (){
-                                  print('Change password clicked!');
-                                },
+                                onTap: () => Get.toNamed('/forgotPassword')
                               )
                             ],
                           ),
@@ -183,7 +183,7 @@ class profileScreen extends StatelessWidget {
                                 child: _buildProfileItem(Icons.error_outline, 'About Us'),
                                 onTap: () {
                                   profileOthersInfoWidget(
-                                    context, 300,
+                                    context, 430.00,
                                     'About Us', aboutUsText,
                                   );
                                 },
@@ -193,7 +193,7 @@ class profileScreen extends StatelessWidget {
                                 child: _buildProfileItem(Icons.verified_user_outlined, 'Terms & Conditions'),
                                 onTap: (){
                                   profileOthersInfoWidget(
-                                      context, 460,
+                                      context, 560.00,
                                       'Terms & Conditions', termsConditionText
                                   );
                                 },
@@ -203,7 +203,7 @@ class profileScreen extends StatelessWidget {
                                 child: _buildProfileItem(Icons.policy_outlined, 'Privacy Policy'),
                                 onTap: () {
                                   profileOthersInfoWidget(
-                                    context, 600,
+                                    context, 560.00,
                                     'Privacy Policy', policyText,
                                   );
                                 },

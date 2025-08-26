@@ -180,7 +180,7 @@ class homeScreen extends StatelessWidget {
                     },
                     child: discoverCard(
                       event: eventsList[index], // Pass the EventData object directly
-                      parentHeight: 260,
+                      parentHeight: 252,
                     ),
                   );
                 },
@@ -203,7 +203,7 @@ class homeScreen extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w700,
-                        fontSize: 18,
+                        fontSize: 16,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -239,7 +239,7 @@ class homeScreen extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w700,
-                        fontSize: 18,
+                        fontSize: 17,
                       ),
                       textAlign: TextAlign.center,
                     ),

@@ -52,26 +52,26 @@ class upcomingCard extends StatelessWidget {
                   fontSize: 16,
                 ),
               ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 3),
               Text(
                 event["eventSummary"]! ,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   color: Colors.white70,
-                  fontSize: 12,
+                  fontSize: 11,
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 6),
               Row(
                 children: [
-                  const Icon(Icons.timer_sharp, size: 14, color: Colors.white70),
+                  const Icon(Icons.timer_sharp, size: 13, color: Colors.white),
                   const SizedBox(width: 4),
                   const Text(
                     "Happening today at ",
                     style: TextStyle(
                       color: Colors.white70,
-                      fontSize: 12,
+                      fontSize: 11,
                     ),
                   ),
                   const SizedBox(width: 4),
@@ -79,22 +79,22 @@ class upcomingCard extends StatelessWidget {
                     event["eventTime"] ?? "",
                     style: const TextStyle(
                       color: Color(0xFF95E143),
-                      fontSize: 12,
+                      fontSize: 11,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 3),
               Row(
                 children: [
-                  const Icon(Icons.location_on, size: 14, color: Colors.white70),
+                  const Icon(Icons.location_on, size: 13, color: Colors.white),
                   const SizedBox(width: 4),
                   Text(
                     event["eventLocation"] ?? "",
                     style: const TextStyle(
                       color: Colors.white70,
-                      fontSize: 12,
+                      fontSize: 11,
                     ),
                   ),
                 ],
@@ -225,14 +225,14 @@ class discoverCard extends StatelessWidget {
                            SizedBox(height: 4),
                           Row(
                             children: [
-                              const Icon(Icons.location_on, size: 12, color: Colors.grey),
+                              const Icon(Icons.location_on, size: 13, color: Colors.grey),
                               const SizedBox(width: 4),
                               Expanded(
                                 child: Text(
                                   event['eventLocation'] ?? 'No Location',
                                   style: TextStyle(
                                     color: Colors.grey.shade400,
-                                    fontSize: 12,
+                                    fontSize: 11,
                                   ),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -243,14 +243,14 @@ class discoverCard extends StatelessWidget {
                           const SizedBox(height: 4),
                           Row(
                             children: [
-                              const Icon(Icons.verified, size: 12, color: Colors.white54),
+                              const Icon(Icons.verified, size: 13, color: Colors.white54),
                               const SizedBox(width: 4),
                               Expanded(
                                 child: Text(
                                   event['organizerName'] ?? 'No Organizer',
                                   style: TextStyle(
                                     color: Colors.grey.shade400,
-                                    fontSize: 12,
+                                    fontSize: 11,
                                   ),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -266,10 +266,11 @@ class discoverCard extends StatelessWidget {
                         event['eventDate'] ?? 'No Date',
                         style: const TextStyle(
                           color: Color(0xFF95E143),
-                          fontSize: 12,
+                          fontSize: 11,
                           fontWeight: FontWeight.w600,
                         ),
-                      ),
+                      )
+
                     ],
                   ),
                 ),
