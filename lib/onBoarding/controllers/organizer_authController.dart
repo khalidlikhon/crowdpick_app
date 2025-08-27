@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OrganizerAuthController extends GetxController {
@@ -29,17 +30,16 @@ class OrganizerAuthController extends GetxController {
     'Canada': 'CAD',
   };
 
-  // Button click state (e.g., for changing button color)
-  var onClick = false.obs;
+
+  // Separate button onChange & loading for login & register
+  var accessOnClick = false.obs;
+  var joinOnClick = false.obs;
+  var isLoginLoading = false.obs;
+  var isRegisterLoading = false.obs;
 
   // Toggle login/register view
   void toggleLogin(bool value) {
     isLogin.value = value;
-  }
-
-  // Update button click state
-  void buttonOnClick(bool value) {
-    onClick.value = value;
   }
 
   // Select country & auto-update currency
@@ -54,15 +54,54 @@ class OrganizerAuthController extends GetxController {
   }
 
   // Login logic
+  // Login logic
   void login() {
-    print('Login pressed: license=${license.value}, password=${password.value}');
-    // TODO: Add your API call here
+    accessOnClick.value = true;
+    isLoginLoading.value = true;
+
+    Future.delayed(const Duration(seconds: 2), () {
+      print('Login pressed: license=${license.value}, password=${password.value}');
+      isLoginLoading.value = false;
+
+      // Show snackbar after login "succeeds"
+      Get.snackbar(
+        'Login',
+        'Login Successful',
+        snackPosition: SnackPosition.BOTTOM,
+        colorText: Colors.white,
+        margin: const EdgeInsets.all(18),
+        borderRadius: 12,
+        duration: const Duration(seconds: 2),
+      );
+    });
   }
 
-  // Registration logic
+
   void register() {
-    print(
-        'Register pressed: org=${organizationName.value}, country=${selectedCountry.value}, currency=${selectedCurrency.value}, fullName=${fullName.value}, email=${email.value}, phone=${phone.value}');
-    // TODO: Add your API call here
+    joinOnClick.value = true;
+    isRegisterLoading.value = true;
+
+    Future.delayed(const Duration(seconds: 2), () {
+      print('Register pressed: org=${organizationName.value}, ...');
+
+      // Show success message
+      Get.snackbar(
+        'Registration',
+        'Account created successfully!',
+        snackPosition: SnackPosition.BOTTOM,
+        colorText: Colors.white,
+        margin: const EdgeInsets.all(18),
+        borderRadius: 12,
+        duration: const Duration(seconds: 2),
+      );
+
+      // Navigate after showing snackbar
+      toggleLogin(true);
+
+
+      isRegisterLoading.value = false;
+    });
   }
+
+
 }

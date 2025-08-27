@@ -6,16 +6,16 @@ import '../component/dataModel.dart';
 
 class clickedEventScreen extends StatelessWidget {
   final Map<String, dynamic> event; // Keep as Map
-  final bool isVerified = true;
 
   const clickedEventScreen({Key? key, required this.event}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final eventData = EventData.fromJson(event);
-    final eventIndex = eventDataList.indexWhere((e) =>
-    e.eventTitle == eventData.eventTitle &&
-        e.eventDate == eventData.eventDate
+    final eventIndex = eventDataList.indexWhere(
+      (e) =>
+          e.eventTitle == eventData.eventTitle &&
+          e.eventDate == eventData.eventDate,
     );
 
     return Scaffold(
@@ -25,10 +25,7 @@ class clickedEventScreen extends StatelessWidget {
           Positioned.fill(
             child: Hero(
               tag: 'clickedImageOnHero-${event["id"]}',
-              child: Image.network(
-                event['image']!,
-                fit: BoxFit.cover,
-              ),
+              child: Image.network(event['image']!, fit: BoxFit.cover),
             ),
           ),
 
@@ -41,13 +38,17 @@ class clickedEventScreen extends StatelessWidget {
               snap: true,
               builder: (context, scrollController) {
                 return ClipRRect(
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(30),
+                  ),
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.black.withOpacity(0.5),
-                        borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(30),
+                        ),
                       ),
                       padding: const EdgeInsets.fromLTRB(20, 25, 20, 20),
                       child: SingleChildScrollView(
@@ -81,13 +82,27 @@ class clickedEventScreen extends StatelessWidget {
                             // Date & Time Row
                             Row(
                               children: [
-                                Icon(Icons.calendar_today, size: 18, color: Colors.grey[300]),
+                                Icon(
+                                  Icons.calendar_today,
+                                  size: 18,
+                                  color: Colors.grey[300],
+                                ),
                                 const SizedBox(width: 6),
-                                Text(event['eventDate']!, style: TextStyle(color: Colors.grey[300])),
+                                Text(
+                                  event['eventDate']!,
+                                  style: TextStyle(color: Colors.grey[300]),
+                                ),
                                 const SizedBox(width: 16),
-                                Icon(Icons.access_time, size: 18, color: Colors.grey[300]),
+                                Icon(
+                                  Icons.access_time,
+                                  size: 18,
+                                  color: Colors.grey[300],
+                                ),
                                 const SizedBox(width: 6),
-                                Text(event['eventTime']!, style: TextStyle(color: Colors.grey[300])),
+                                Text(
+                                  event['eventTime']!,
+                                  style: TextStyle(color: Colors.grey[300]),
+                                ),
                               ],
                             ),
                             const SizedBox(height: 12),
@@ -95,7 +110,11 @@ class clickedEventScreen extends StatelessWidget {
                             // Location
                             Row(
                               children: [
-                                Icon(Icons.location_on, size: 18, color: Colors.grey[300]),
+                                Icon(
+                                  Icons.location_on,
+                                  size: 18,
+                                  color: Colors.grey[300],
+                                ),
                                 const SizedBox(width: 6),
                                 Expanded(
                                   child: Text(
@@ -110,7 +129,11 @@ class clickedEventScreen extends StatelessWidget {
                             // Deadline or extra info
                             Row(
                               children: [
-                                Icon(Icons.timer_off_outlined, size: 18, color: Colors.grey[300]),
+                                Icon(
+                                  Icons.timer_off_outlined,
+                                  size: 18,
+                                  color: Colors.grey[300],
+                                ),
                                 const SizedBox(width: 6),
                                 Expanded(
                                   child: Text(
@@ -124,12 +147,41 @@ class clickedEventScreen extends StatelessWidget {
 
                             // Organizer
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text('Organized by : ', style: TextStyle(color: Colors.grey[200])),
-                                if (isVerified)
-                                  Text(event['organizerName']!, style: TextStyle(color: Colors.grey[200], fontWeight: FontWeight.w700)),
-                                if (isVerified) const SizedBox(width: 6),
-                                const Icon(Icons.verified, size: 13, color: Colors.blueAccent),
+                                Text(
+                                  'Organized by : ',
+                                  style: TextStyle(color: Colors.grey[200]),
+                                ),
+
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      // If verified → show icon first
+                                      if (event['isVerified'] == true) ...[
+                                        const Icon(
+                                          Icons.verified,
+                                          size: 13,
+                                          color: Colors.blueAccent,
+                                        ),
+                                        const SizedBox(width: 4),
+                                      ],
+
+                                      // Organizer name (always visible)
+                                      Expanded(
+                                        child: Text(
+                                          event['organizerName'] ?? '',
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            color: Colors.grey[200],
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                             const SizedBox(height: 28),
@@ -147,15 +199,14 @@ class clickedEventScreen extends StatelessWidget {
                               title: 'Privacy Policy',
                               textContent: event['eventPolicy'],
                               isExpanded: false,
-
                             ),
 
                             const SizedBox(height: 16),
                             Text(
                               'Ticket details & price',
                               style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
                             const SizedBox(height: 12),
@@ -170,7 +221,9 @@ class clickedEventScreen extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFF95E143),
                                   foregroundColor: Colors.black,
-                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 16,
+                                  ),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
@@ -208,7 +261,10 @@ class clickedEventScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: IconButton(
-                  icon: const Icon(Icons.keyboard_backspace, color: Colors.white),
+                  icon: const Icon(
+                    Icons.keyboard_backspace,
+                    color: Colors.white,
+                  ),
                   onPressed: () => Navigator.pop(context),
                 ),
               ),
@@ -244,7 +300,8 @@ class _TicketListWidget extends StatelessWidget {
     final ticketData = entry.value as Map<String, dynamic>;
     final type = entry.key;
     final price = ticketData['price']?.toString() ?? '0';
-    final description = ticketData['description']?.toString() ?? 'No description available';
+    final description =
+        ticketData['description']?.toString() ?? 'No description available';
     final available = ticketData['available']?.toString() ?? '0';
 
     return Container(
@@ -253,7 +310,10 @@ class _TicketListWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.4),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Color(0xFF95E143).withOpacity(0.3), width: 0.5),
+        border: Border.all(
+          color: Color(0xFF95E143).withOpacity(0.3),
+          width: 0.5,
+        ),
       ),
       child: Row(
         children: [
@@ -271,10 +331,7 @@ class _TicketListWidget extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   description,
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontSize: 12,
-                  ),
+                  style: const TextStyle(color: Colors.white70, fontSize: 12),
                 ),
               ],
             ),

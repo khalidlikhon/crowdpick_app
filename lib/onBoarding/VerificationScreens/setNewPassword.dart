@@ -4,7 +4,6 @@ import '../../component/_customWidgets/textFormField.dart';
 import '../../component/authGuide.dart';
 import '../controllers/verificationController.dart';
 
-
 class setNewPasswordScreen extends StatelessWidget {
   setNewPasswordScreen({super.key});
 
@@ -26,16 +25,18 @@ class setNewPasswordScreen extends StatelessWidget {
                 Text(
                   'Crowd',
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700),
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
                 Text(
                   'pick',
                   style: TextStyle(
-                      color: Color(0xFF95E143),
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700),
+                    color: Color(0xFF95E143),
+                    fontSize: 25,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ],
             ),
@@ -69,35 +70,38 @@ class setNewPasswordScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 28),
                   Obx(
-                        () => SizedBox(
+                    () => SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: controller.onClick.value
-                              ? const Color(0xFF95E143)
-                              : const Color(0xFF212121),
+                          backgroundColor: const Color(0xFF95E143),
                           foregroundColor: Colors.black,
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                        ),
-                        onPressed: controller.goToLoginScreen,
-                        child: Text(
-                          'Next',
-                          style: TextStyle(
-                            color: controller.onClick.value
-                                ? Colors.black
-                                : Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
+                            borderRadius: BorderRadius.circular(8),
                           ),
                         ),
+                        onPressed: controller.goToLoginScreen,
+                        child: controller.isLoading.value
+                            ? SizedBox(
+                                height: 24,
+                                width: 24,
+                                child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFF141414)),
+                              )
+                            : Text(
+                                'Next',
+                                style: TextStyle(
+                                  color: Color(0xFF141414),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
                       ),
                     ),
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

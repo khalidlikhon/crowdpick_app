@@ -243,8 +243,10 @@ class discoverCard extends StatelessWidget {
                           const SizedBox(height: 4),
                           Row(
                             children: [
-                              const Icon(Icons.verified, size: 13, color: Colors.white54),
-                              const SizedBox(width: 4),
+                              if (event['isVerified'] == true) ...[
+                                const Icon(Icons.verified, size: 13, color: Colors.white54),
+                              ],
+                              SizedBox(width: 4),
                               Expanded(
                                 child: Text(
                                   event['organizerName'] ?? 'No Organizer',
@@ -385,6 +387,75 @@ class pastEventStorie extends StatelessWidget {
 
 
 /// Our Service card
+///
+Widget allServiceCard(BuildContext context) {
+  final double screenWidth = MediaQuery.of(context).size.width;
+
+  // Decide number of columns
+  int crossAxisCount = screenWidth >= 900 ? 3 : 2;
+
+  return GridView.builder(
+    shrinkWrap: true,
+    physics: NeverScrollableScrollPhysics(),
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: crossAxisCount,
+      crossAxisSpacing: 16,
+      mainAxisSpacing: 12,
+      mainAxisExtent: 124, // Let height depend on content
+    ),
+    itemCount: 6,
+    itemBuilder: (context, index) {
+      final services = [
+        {
+          "icon": Icons.confirmation_num,
+          "title": "Easy Ticket Purchase",
+          "serviceDescription":
+          "Discover and book tickets for your favorite events — from concerts to conferences — directly on Crowdpick, anytime, anywhere."
+        },
+        {
+          "icon": Icons.delivery_dining,
+          "title": "Instant Ticket Delivery",
+          "serviceDescription":
+          "Get your tickets instantly after purchase via email, or receive them directly through WhatsApp for maximum convenience."
+        },
+        {
+          "icon": Icons.payments,
+          "title": "Multiple Payment Methods",
+          "serviceDescription":
+          "Pay securely with bKash, Nagad, Upay, Visa, Mastercard, and more — giving you the flexibility to choose your preferred payment option."
+        },
+        {
+          "icon": Icons.featured_play_list_outlined,
+          "title": "Crowdpick Pass",
+          "serviceDescription":
+          "Access all your purchased tickets instantly inside Crowdpick with QR codes — no need to download or print separate PDF tickets."
+        },
+        {
+          "icon": Icons.dashboard,
+          "title": "Organizer Dashboard",
+          "serviceDescription":
+          "Crowdpick’s powerful dashboard gives organizers real-time sales data, attendance insights, and event performance reports - all in one place."
+        },
+        {
+          "icon": Icons.qr_code_scanner,
+          "title": "Seamless Check‑In",
+          "serviceDescription":
+          "Simplify entry with Crowdpick’s fast QR ticket scanning system, ensuring a smooth, hassle‑free experience for both attendees and organizers."
+        }
+      ];
+
+      final service = services[index];
+      return serviceCard(
+        context,
+        service["icon"] as IconData,
+        service["title"] as String,
+        service["serviceDescription"] as String,
+      );
+    },
+
+  );
+}
+
 Widget serviceCard(BuildContext context, serviceIcon, serviceTitle, serviceDescription,) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
@@ -394,104 +465,37 @@ Widget serviceCard(BuildContext context, serviceIcon, serviceTitle, serviceDescr
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min, // Height depends on content
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Icon(serviceIcon, size: 22, color: Colors.white),
           const SizedBox(height: 6),
           Text(
             serviceTitle,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
-              fontSize: 12,
+              fontSize: 10,
             ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 2),
-          Text(
-            serviceDescription,
-            maxLines: 4,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              color: Colors.white70,
-              fontSize: 9,
+          Expanded(
+            child: Text(
+              serviceDescription,
+              maxLines: 5,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 7,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
           ),
         ],
       ),
+
     );
 }
-Widget allServiceCard(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-
-    // Decide number of columns
-    int crossAxisCount = screenWidth >= 900 ? 3 : 2;
-
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 12,
-        mainAxisExtent: 124, // Let height depend on content
-      ),
-      itemCount: 6,
-      itemBuilder: (context, index) {
-        final services = [
-          {
-            "icon": Icons.confirmation_num,
-            "title": "Easy Ticket Purchase",
-            "serviceDescription":
-            "Discover and book tickets for your favorite events — from concerts to conferences — directly on Crowdpick, anytime, anywhere."
-          },
-          {
-            "icon": Icons.delivery_dining,
-            "title": "Instant Ticket Delivery",
-            "serviceDescription":
-            "Get your tickets instantly after purchase via email, or receive them directly through WhatsApp for maximum convenience."
-          },
-          {
-            "icon": Icons.payments,
-            "title": "Multiple Payment Methods",
-            "serviceDescription":
-            "Pay securely with bKash, Nagad, Upay, Visa, Mastercard, and more — giving you the flexibility to choose your preferred payment option."
-          },
-          {
-            "icon": Icons.featured_play_list_outlined,
-            "title": "Crowdpick Pass",
-            "serviceDescription":
-            "Access all your purchased tickets instantly inside Crowdpick with QR codes — no need to download or print separate PDF tickets."
-          },
-          {
-            "icon": Icons.dashboard,
-            "title": "Organizer Dashboard",
-            "serviceDescription":
-            "Crowdpick’s powerful dashboard gives organizers real-time sales data, attendance insights, and event performance reports — all in one place."
-          },
-          {
-            "icon": Icons.qr_code_scanner,
-            "title": "Seamless Check‑In",
-            "serviceDescription":
-            "Simplify entry with Crowdpick’s fast QR ticket scanning system, ensuring a smooth, hassle‑free experience for both attendees and organizers."
-          }
-        ];
-
-        final service = services[index];
-        return serviceCard(
-          context,
-          service["icon"] as IconData,
-          service["title"] as String,
-          service["serviceDescription"] as String,
-        );
-      },
-
-    );
-  }
 
 
 
@@ -502,7 +506,6 @@ class allCategoriesCard extends StatefulWidget {
   @override
   State<allCategoriesCard> createState() => _allCategoriesCardState();
 }
-
 class _allCategoriesCardState extends State<allCategoriesCard> {
   final List<String> categoryList = [
     'Concerts',

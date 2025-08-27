@@ -9,7 +9,9 @@ class emailVerificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(EmailVerificationController()); // Controller instance
+    final controller = Get.put(
+      EmailVerificationController(),
+    ); // Controller instance
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -21,8 +23,22 @@ class emailVerificationScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Text('Crowd', style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.w700)),
-              Text('pick', style: TextStyle(color: Color(0xFF95E143), fontSize: 25, fontWeight: FontWeight.w700)),
+              Text(
+                'Crowd',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              Text(
+                'pick',
+                style: TextStyle(
+                  color: Color(0xFF95E143),
+                  fontSize: 25,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 30),
@@ -35,7 +51,10 @@ class emailVerificationScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Email or Phone Number', style: TextStyle(color: Color(0xFFB0B0B0))),
+                const Text(
+                  'Email or Phone Number',
+                  style: TextStyle(color: Color(0xFFB0B0B0)),
+                ),
                 const SizedBox(height: 6),
                 costomFormField(
                   hintText: 'Enter your registered email or phone',
@@ -43,23 +62,34 @@ class emailVerificationScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 22),
 
-                Obx(() => SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: controller.onClick.value ? const Color(0xFF95E143) : const Color(0xFF212121),
-                      foregroundColor: Colors.black,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                    ),
-                    onPressed: controller.goToOtpScreen,
-                    child: Icon(
-                      Icons.navigate_next_outlined,
-                      color: controller.onClick.value ? Colors.black : Colors.white,
-                      size: 18,
+                Obx(
+                  () => SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF95E143),
+                        foregroundColor: Colors.black,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      onPressed: controller.goToOtpScreen,
+                      child: controller.isLoading.value
+                          ? SizedBox(
+                              height: 24,
+                              width: 24,
+                              child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFF141414),
+                              ),
+                            )
+                          : Icon(
+                              Icons.navigate_next_outlined,
+                              color: controller.onClick.value ? Colors.white : const Color(0xFF212121),
+                              size: 18,
+                            ),
                     ),
                   ),
-                )),
+                ),
               ],
             ),
           ),

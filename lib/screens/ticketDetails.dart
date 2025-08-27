@@ -82,11 +82,15 @@ class ticketDetailsScreen extends StatelessWidget {
                                     // Organizer + Verified (first line)
                                     Row(
                                       children: [
-                                        Text(
-                                          '${ticket['organizerName'] ?? ''}',
-                                          style: TextStyle(
-                                            color: Colors.grey.shade400,
-                                            fontSize: 13,
+                                        Expanded(
+                                          child: Text(
+                                            '${ticket['organizerName'] ?? ''}',
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: Colors.grey.shade400,
+                                              fontSize: 13,
+                                            ),
                                           ),
                                         ),
                                         if (isVerified) ...[
@@ -99,6 +103,7 @@ class ticketDetailsScreen extends StatelessWidget {
                                         ],
                                       ],
                                     ),
+
                                     const SizedBox(height: 3),
 
                                     // Presents (second line)

@@ -5,7 +5,9 @@ import '../VerificationScreens/setNewPassword.dart';
 
 /// EmailVerificationController
 class EmailVerificationController extends GetxController {
-  var onClick = true.obs;
+  var onClick = false.obs;
+  var isLoading = false.obs;
+
 
   void toggleClick() {
     onClick.value = !onClick.value;
@@ -13,14 +15,17 @@ class EmailVerificationController extends GetxController {
 
   void goToOtpScreen() {
     toggleClick();
-    Get.to(() => otpVerificationScreen());
+    isLoading.value = true;
+    Future.delayed(Duration(seconds: 1), ()=> Get.to(() => otpVerificationScreen()));
   }
 }
 
 
 /// OtpVerificationController
 class OtpVerificationController extends GetxController {
-  var onClick = true.obs;
+  var onClick = false.obs;
+  var isLoading = false.obs;
+
 
   void toggleClick() {
     onClick.value = !onClick.value;
@@ -28,13 +33,15 @@ class OtpVerificationController extends GetxController {
 
   void goToSetNewPassword() {
     toggleClick();
-    Get.to(() => setNewPasswordScreen());
+    isLoading.value = true;
+    Future.delayed(Duration(seconds: 1), ()=> Get.to(() => setNewPasswordScreen()));
   }
 }
 
 /// SetNewPasswordController
 class SetNewPasswordController extends GetxController {
-  RxBool onClick = true.obs;
+  RxBool onClick = false.obs;
+  var isLoading = false.obs;
 
   void toggleButton() {
     onClick.value = !onClick.value;
@@ -42,6 +49,7 @@ class SetNewPasswordController extends GetxController {
 
   void goToLoginScreen() {
     toggleButton();
-    Get.offAllNamed('/loginScreen');
+    isLoading.value = true;
+    Future.delayed(Duration(seconds: 2), ()=>  Get.offAllNamed('/loginScreen'));
   }
 }

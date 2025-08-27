@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 
-
 /// LoginController
 class LoginController extends GetxController {
   var keepLoggedIn = false.obs;
   var onClick = false.obs;
+  var isLoading = false.obs;
 
   void toggleKeepLoggedIn(bool? value) {
     keepLoggedIn.value = value ?? false;
@@ -12,17 +12,19 @@ class LoginController extends GetxController {
 
   void login() {
     onClick.value = true;
-    Get.offAllNamed('/homeScreen');
+    isLoading.value = true;
+    Future.delayed(Duration(seconds: 2), () => Get.offAllNamed('/homeScreen'));
   }
 }
 
-
 /// SignupController
-class SignupController extends GetxController{
+class SignupController extends GetxController {
   var onClick = false.obs;
+  var isLoading = false.obs;
 
   void signup() {
     onClick.value = true;
-    Get.offAllNamed('/loginScreen');
+    isLoading.value = true;
+    Future.delayed(Duration(seconds: 1), () => Get.offAllNamed('/loginScreen'));
   }
 }

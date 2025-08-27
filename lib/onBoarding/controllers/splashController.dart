@@ -2,6 +2,7 @@
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {
+  /// Reactive animation values
   var scale = 0.0.obs;
   var opacity = 0.0.obs;
 
@@ -9,11 +10,13 @@ class SplashController extends GetxController {
   void onInit() {
     super.onInit();
 
+    // Start animation after a short delay
     Future.delayed(200.milliseconds, () {
-      scale.value = 1.2;
-      opacity.value = 1.0;
+      scale.value = 1.0;   // natural size
+      opacity.value = 1.0; // fully visible
     });
 
+    // Navigate after animation is complete
     Future.delayed(2400.milliseconds, () {
       Get.offAllNamed('/loginScreen');
     });

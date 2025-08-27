@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:crowdpick_app/component/static_styles.dart';
 import '../component/_customWidgets/textFormField.dart';
 import '../component/authGuide.dart';
+import '../component/static_styles.dart';
 import 'controllers/authController.dart';
 
 class singUpScreen extends StatelessWidget {
@@ -10,7 +11,7 @@ class singUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = Get.put(SignupController());
+    final controller = Get.put(SignupController());
 
     return Scaffold(
       backgroundColor: appBackgroundColor,
@@ -23,8 +24,22 @@ class singUpScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                Text('Crowd', style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.w700)),
-                Text('pick', style: TextStyle(color: Color(0xFF95E143), fontSize: 25, fontWeight: FontWeight.w700)),
+                Text(
+                  'Crowd',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                Text(
+                  'pick',
+                  style: TextStyle(
+                    color: Color(0xFF95E143),
+                    fontSize: 25,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 30),
@@ -36,9 +51,19 @@ class singUpScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                  Expanded(child: socialIconButton(iconPath: 'assets/icons/googleIcon.png', onTap: () {})),
+                  Expanded(
+                    child: socialIconButton(
+                      iconPath: 'assets/icons/googleIcon.png',
+                      onTap: () {},
+                    ),
+                  ),
                   const SizedBox(width: 20),
-                  Expanded(child: socialIconButton(iconPath: 'assets/icons/facebookIcon.png', onTap: () {})),
+                  Expanded(
+                    child: socialIconButton(
+                      iconPath: 'assets/icons/facebookIcon.png',
+                      onTap: () {},
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -53,9 +78,15 @@ class singUpScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Full Name', style: TextStyle(color: Color(0xFFB0B0B0))),
+                  const Text(
+                    'Full Name',
+                    style: TextStyle(color: Color(0xFFB0B0B0)),
+                  ),
                   const SizedBox(height: 6),
-                  costomFormField(hintText: 'Your full name', onChanged: (v) {}),
+                  costomFormField(
+                    hintText: 'Your full name',
+                    onChanged: (v) {},
+                  ),
 
                   const SizedBox(height: 11),
                   // Side-by-side Email + Phone
@@ -65,9 +96,15 @@ class singUpScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('Email Address', style: TextStyle(color: Color(0xFFB0B0B0))),
+                            const Text(
+                              'Email Address',
+                              style: TextStyle(color: Color(0xFFB0B0B0)),
+                            ),
                             const SizedBox(height: 6),
-                            costomFormField(hintText: 'Your email', onChanged: (v) {}),
+                            costomFormField(
+                              hintText: 'Your email',
+                              onChanged: (v) {},
+                            ),
                           ],
                         ),
                       ),
@@ -76,9 +113,15 @@ class singUpScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('Phone number', style: TextStyle(color: Color(0xFFB0B0B0))),
+                            const Text(
+                              'Phone number',
+                              style: TextStyle(color: Color(0xFFB0B0B0)),
+                            ),
                             const SizedBox(height: 6),
-                            costomFormField(hintText: 'Your Number', onChanged: (v) {}),
+                            costomFormField(
+                              hintText: 'Your Number',
+                              onChanged: (v) {},
+                            ),
                           ],
                         ),
                       ),
@@ -86,32 +129,53 @@ class singUpScreen extends StatelessWidget {
                   ),
 
                   const SizedBox(height: 11),
-                  const Text('Password', style: TextStyle(color: Color(0xFFB0B0B0))),
+                  const Text(
+                    'Password',
+                    style: TextStyle(color: Color(0xFFB0B0B0)),
+                  ),
                   const SizedBox(height: 6),
-                  costomFormField(hintText: 'Set a strong password', obscureText: true, onChanged: (v) {}),
+                  costomFormField(
+                    hintText: 'Set a strong password',
+                    obscureText: true,
+                    onChanged: (v) {},
+                  ),
 
                   const SizedBox(height: 22),
 
                   // Sign Up Button
-                  Obx(() => SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: c.onClick.value ? const Color(0xFF95E143) : const Color(0xFF212121),
-                        foregroundColor: Colors.black,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                      ),
-                      onPressed: c.signup,
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          color: c.onClick.value ? Colors.black : Colors.white,
-                          fontSize: 16,
+                  Obx(
+                    () => SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: controller.onClick.value
+                              ? const Color(0xFF95E143)
+                              : const Color(0xFF212121),
+                          foregroundColor: Colors.black,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
+                        onPressed: controller.signup,
+                        child: controller.isLoading.value
+                            ? SizedBox(
+                                height: 24,
+                                width: 24,
+                                child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFF141414),),
+                              )
+                            : Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                  color: controller.onClick.value
+                                      ? Colors.black
+                                      : Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
                       ),
                     ),
-                  )),
+                  ),
 
                   const SizedBox(height: 20),
 

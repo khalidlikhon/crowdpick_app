@@ -7,6 +7,7 @@ class EventData {
   final String eventDate;
   final String eventTime;
   final String organizerName;
+  final bool isVerified;
   final String image;
   final String purchaseDeadline;
   final String eventSummary;
@@ -19,6 +20,7 @@ class EventData {
     required this.eventDate,
     required this.eventTime,
     required this.organizerName,
+    required this.isVerified,
     required this.image,
     required this.purchaseDeadline,
     required this.eventSummary,
@@ -34,6 +36,7 @@ class EventData {
       eventDate: json['eventDate'] ?? '',
       eventTime: json['eventTime'] ?? '',
       organizerName: json['organizerName'] ?? '',
+      isVerified: json['isVerified'] ?? false,
       eventSummary: json['eventSummary'] ?? '',
       eventPolicy: json['eventPolicy'] ?? '',
       purchaseDeadline: json['purchaseDeadline'] ?? '',
@@ -63,6 +66,7 @@ class EventData {
     'eventDate': eventDate,
     'eventTime': eventTime,
     'organizerName': organizerName,
+    'isVerified': isVerified,
     'image': image,
     'purchaseDeadline': purchaseDeadline,
     'eventSummary': eventSummary,

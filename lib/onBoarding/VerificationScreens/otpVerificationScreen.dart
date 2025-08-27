@@ -25,16 +25,18 @@ class otpVerificationScreen extends StatelessWidget {
               Text(
                 'Crowd',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontWeight: FontWeight.w700),
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               Text(
                 'pick',
                 style: TextStyle(
-                    color: Color(0xFF95E143),
-                    fontSize: 25,
-                    fontWeight: FontWeight.w700),
+                  color: Color(0xFF95E143),
+                  fontSize: 25,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ],
           ),
@@ -54,24 +56,28 @@ class otpVerificationScreen extends StatelessWidget {
 
                 // Reactive button using GetX
                 Obx(
-                      () => SizedBox(
+                  () => SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: controller.onClick.value
-                            ? const Color(0xFF95E143)
-                            : const Color(0xFF212121),
+                        backgroundColor: const Color(0xFF95E143),
                         foregroundColor: Colors.black,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
                       onPressed: controller.goToSetNewPassword,
-                      child: Icon(
+                      child: controller.isLoading.value
+                          ? SizedBox(
+                        height: 24,
+                        width: 24,
+                        child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFF141414),
+                        ),
+                      )
+                          : Icon(
                         Icons.navigate_next_outlined,
-                        color: controller.onClick.value
-                            ? Colors.black
-                            : Colors.white,
+                        color: controller.onClick.value ? Colors.white : const Color(0xFF212121),
                         size: 18,
                       ),
                     ),
