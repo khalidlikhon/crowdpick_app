@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../VerificationScreens/otpVerificationScreen.dart';
 import '../VerificationScreens/setNewPassword.dart';
@@ -8,6 +9,8 @@ class EmailVerificationController extends GetxController {
   var onClick = false.obs;
   var isLoading = false.obs;
 
+
+  TextEditingController emailController = TextEditingController();
 
   void toggleClick() {
     onClick.value = !onClick.value;
@@ -26,7 +29,6 @@ class OtpVerificationController extends GetxController {
   var onClick = false.obs;
   var isLoading = false.obs;
 
-
   void toggleClick() {
     onClick.value = !onClick.value;
   }
@@ -41,7 +43,22 @@ class OtpVerificationController extends GetxController {
 /// SetNewPasswordController
 class SetNewPasswordController extends GetxController {
   RxBool onClick = false.obs;
-  var isLoading = false.obs;
+  RxBool isLoading = false.obs;
+
+  RxBool isPasswordVisible = false.obs;
+  RxBool isConfirmPasswordVisible = false.obs;
+
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPassword = TextEditingController();
+
+
+  void togglePasswordVisibility() {
+    isPasswordVisible.value = !isPasswordVisible.value;
+  }
+
+  void toggleConfirmPasswordVisibility() {
+    isConfirmPasswordVisible.value = !isConfirmPasswordVisible.value;
+  }
 
   void toggleButton() {
     onClick.value = !onClick.value;
@@ -50,6 +67,7 @@ class SetNewPasswordController extends GetxController {
   void goToLoginScreen() {
     toggleButton();
     isLoading.value = true;
-    Future.delayed(Duration(seconds: 2), ()=>  Get.offAllNamed('/loginScreen'));
+    Future.delayed(const Duration(seconds: 2),
+            () => Get.offAllNamed('/loginScreen'));
   }
 }

@@ -52,13 +52,14 @@ class emailVerificationScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Email or Phone Number',
+                  'Email Address',
                   style: TextStyle(color: Color(0xFFB0B0B0)),
                 ),
                 const SizedBox(height: 6),
-                costomFormField(
+                CustomFormField(
                   hintText: 'Enter your registered email or phone',
-                  onChanged: (v) {},
+                  prefixIcon: Icons.email_outlined,
+                  controller: controller.emailController,
                 ),
                 const SizedBox(height: 22),
 

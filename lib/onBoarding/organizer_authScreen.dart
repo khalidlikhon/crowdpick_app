@@ -13,124 +13,129 @@ class OrganizerAuthScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF141414),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
-                    'Crowd',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  Text(
-                    'pick',
-                    style: TextStyle(
-                      color: Color(0xFF95E143),
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),
-              const Text(
-                "Welcome to",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const Text(
-                "Organizer Panel",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                "Manage your events efficiently using Crowdpick. "
-                "Login if you're returning, or register to start organizing your first event!",
-                style: TextStyle(color: Colors.grey, fontSize: 14),
-              ),
-              const SizedBox(height: 28),
-
-              // Login/Register toggle buttons
-              Obx(
-                () => Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () => controller.toggleLogin(true),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: controller.isLogin.value
-                              ? const Color(0xFF95E143)
-                              : Colors.transparent,
-                          foregroundColor: controller.isLogin.value
-                              ? Colors.black
-                              : Colors.white,
-                          elevation: 0,
-                          side: BorderSide(
-                            color: Colors.white.withOpacity(0.2),
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        child: const Text(
-                          "Login",
-                          style: TextStyle(fontWeight: FontWeight.w700),
-                        ),
+        child: RefreshIndicator(
+          onRefresh: () => controller.reset(delay: 800),
+          color: const Color(0xFF95E143),
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(), // required for RefreshIndicator
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      'Crowd',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () => controller.toggleLogin(false),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: !controller.isLogin.value
-                              ? const Color(0xFF95E143)
-                              : Colors.transparent,
-                          foregroundColor: !controller.isLogin.value
-                              ? Colors.black
-                              : Colors.white,
-                          elevation: 0,
-                          side: BorderSide(
-                            color: Colors.white.withOpacity(0.2),
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        child: const Text(
-                          "Register",
-                          style: TextStyle(fontWeight: FontWeight.w700),
-                        ),
+                    Text(
+                      'pick',
+                      style: TextStyle(
+                        color: Color(0xFF95E143),
+                        fontSize: 25,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(height: 32),
+                const SizedBox(height: 30),
+                const Text(
+                  "Welcome to",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Text(
+                  "Organizer Panel",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  "Manage your events efficiently using Crowdpick. "
+                      "Login if you're returning, or register to start organizing your first event!",
+                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                ),
+                const SizedBox(height: 28),
 
-              Obx(
-                () => controller.isLogin.value
-                    ? LoginItems(controller: controller)
-                    : OrganizerItems(controller: controller),
-              ),
-            ],
+                // Login/Register toggle buttons
+                Obx(
+                      () => Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () => controller.toggleLogin(true),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: controller.isLogin.value
+                                ? const Color(0xFF95E143)
+                                : Colors.transparent,
+                            foregroundColor: controller.isLogin.value
+                                ? Colors.black
+                                : Colors.white,
+                            elevation: 0,
+                            side: BorderSide(
+                              color: Colors.white.withOpacity(0.2),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          child: const Text(
+                            "Login",
+                            style: TextStyle(fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () => controller.toggleLogin(false),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: !controller.isLogin.value
+                                ? const Color(0xFF95E143)
+                                : Colors.transparent,
+                            foregroundColor: !controller.isLogin.value
+                                ? Colors.black
+                                : Colors.white,
+                            elevation: 0,
+                            side: BorderSide(
+                              color: Colors.white.withOpacity(0.2),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          child: const Text(
+                            "Register",
+                            style: TextStyle(fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 32),
+
+                Obx(
+                      () => controller.isLogin.value
+                      ? LoginItems(controller: controller)
+                      : OrganizerItems(controller: controller),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -154,17 +159,31 @@ class LoginItems extends StatelessWidget {
           style: TextStyle(color: Color(0xFFB0B0B0)),
         ),
         const SizedBox(height: 6),
-        costomFormField(
+        CustomFormField(
           hintText: 'Enter Your Organizer License',
-          onChanged: (val) => controller.license.value = val,
+          controller: controller.licenseController,
         ),
         const SizedBox(height: 10),
         const Text('Password', style: TextStyle(color: Color(0xFFB0B0B0))),
         const SizedBox(height: 6),
-        costomFormField(
-          hintText: 'Enter Your Password',
-          obscureText: true,
-          onChanged: (val) => controller.password.value = val,
+        Obx(
+          () => CustomFormField(
+            hintText: 'Enter Your Password',
+            obscureText: !controller.loginPasswordVisible.value,
+            prefixIcon: Icons.lock_outline,
+            suffixIcon: IconButton(
+              icon: Icon(
+                controller.loginPasswordVisible.value
+                    ? Icons.visibility_outlined
+                    : Icons.visibility_off_outlined,
+                color: controller.loginPasswordVisible.value
+                    ? Colors.white
+                    : Colors.grey,
+              ),
+              onPressed: controller.toggleLoginPasswordVisibility,
+            ),
+            controller: controller.passwordController,
+          ),
         ),
         const SizedBox(height: 24),
         Obx(
@@ -223,9 +242,9 @@ class OrganizerItems extends StatelessWidget {
           style: TextStyle(color: Color(0xFFB0B0B0)),
         ),
         const SizedBox(height: 6),
-        costomFormField(
+        CustomFormField(
           hintText: 'Enter Your organization name',
-          onChanged: (val) => controller.organizationName.value = val,
+          controller: controller.organizationNameController,
         ),
         const SizedBox(height: 12),
         // Country & Currency
@@ -310,23 +329,26 @@ class OrganizerItems extends StatelessWidget {
         const SizedBox(height: 10),
         const Text('Full Name', style: TextStyle(color: Color(0xFFB0B0B0))),
         const SizedBox(height: 6),
-        costomFormField(
+        CustomFormField(
           hintText: 'Your full name',
-          onChanged: (val) => controller.fullName.value = val,
+          prefixIcon: Icons.person_outline,
+          controller: controller.fullNameController,
         ),
         const SizedBox(height: 10),
         const Text('Email Address', style: TextStyle(color: Color(0xFFB0B0B0))),
         const SizedBox(height: 6),
-        costomFormField(
+        CustomFormField(
           hintText: 'Enter Email Address',
-          onChanged: (val) => controller.email.value = val,
+          prefixIcon: Icons.email_outlined,
+          controller: controller.emailController,
         ),
         const SizedBox(height: 10),
         const Text('Phone Number', style: TextStyle(color: Color(0xFFB0B0B0))),
         const SizedBox(height: 6),
-        costomFormField(
+        CustomFormField(
           hintText: 'Enter Phone Number',
-          onChanged: (val) => controller.phone.value = val,
+          prefixIcon: Icons.call_outlined,
+          controller: controller.phoneController,
         ),
         const SizedBox(height: 10),
         Row(
@@ -340,10 +362,23 @@ class OrganizerItems extends StatelessWidget {
                     style: TextStyle(color: Color(0xFFB0B0B0)),
                   ),
                   const SizedBox(height: 6),
-                  costomFormField(
+                  Obx(()=> CustomFormField(
                     hintText: 'Set a strong pass',
-                    onChanged: (val) => controller.setPassword.value = val,
-                  ),
+                    prefixIcon: Icons.lock_outline,
+                    obscureText: !controller.registerPasswordVisible.value,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        controller.registerPasswordVisible.value
+                            ? Icons.visibility_outlined
+                            : Icons.visibility_off_outlined,
+                        color: controller.registerPasswordVisible.value
+                            ? Colors.white
+                            : Colors.grey,
+                      ),
+                      onPressed: controller.toggleRegisterPasswordVisibility,
+                    ),
+                    controller: controller.setPasswordController,
+                  )),
                 ],
               ),
             ),
@@ -357,11 +392,23 @@ class OrganizerItems extends StatelessWidget {
                     style: TextStyle(color: Color(0xFFB0B0B0)),
                   ),
                   const SizedBox(height: 6),
-                  costomFormField(
+                  Obx(()=> CustomFormField(
                     hintText: 'Re-enter your pass',
-                    obscureText: true,
-                    onChanged: (val) => controller.confirmPassword.value = val,
-                  ),
+                    prefixIcon: Icons.lock_outline,
+                    obscureText: !controller.registerConfirmPasswordVisible.value,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        controller.registerConfirmPasswordVisible.value
+                            ? Icons.visibility_outlined
+                            : Icons.visibility_off_outlined,
+                        color: controller.registerConfirmPasswordVisible.value
+                            ? Colors.white
+                            : Colors.grey,
+                      ),
+                      onPressed: controller.toggleRegisterConfirmPasswordVisibility,
+                    ),
+                    controller: controller.confirmPasswordController,
+                  )),
                 ],
               ),
             ),

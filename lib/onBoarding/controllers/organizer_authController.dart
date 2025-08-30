@@ -2,23 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OrganizerAuthController extends GetxController {
-  // Toggle between login and register
   var isLogin = true.obs;
 
   // Login fields
-  var license = ''.obs;
-  var password = ''.obs;
+  TextEditingController licenseController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  var loginPasswordVisible = false.obs;
 
   // Register fields
   var organizationName = ''.obs;
   var selectedCountry = Rx<String?>(null);
   var selectedCurrency = Rx<String?>(null);
 
-  var fullName = ''.obs;
-  var email = ''.obs;
-  var phone = ''.obs;
-  var setPassword = ''.obs;
-  var confirmPassword = ''.obs;
+  TextEditingController organizationNameController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController setPasswordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  var registerPasswordVisible = false.obs; // Added
+  var registerConfirmPasswordVisible = false.obs; // Added
 
   // Country and currency mapping
   final List<String> countries = ['Bangladesh', 'India', 'USA', 'UK', 'Canada'];
@@ -29,7 +32,6 @@ class OrganizerAuthController extends GetxController {
     'UK': 'GBP',
     'Canada': 'CAD',
   };
-
 
   // Separate button onChange & loading for login & register
   var accessOnClick = false.obs;
@@ -53,17 +55,28 @@ class OrganizerAuthController extends GetxController {
     selectedCurrency.value = value;
   }
 
-  // Login logic
+  // Password visibility toggles
+  void toggleLoginPasswordVisibility() {
+    loginPasswordVisible.value = !loginPasswordVisible.value;
+  }
+
+  void toggleRegisterPasswordVisibility() {
+    registerPasswordVisible.value = !registerPasswordVisible.value;
+  }
+
+  void toggleRegisterConfirmPasswordVisibility() {
+    registerConfirmPasswordVisible.value = !registerConfirmPasswordVisible.value;
+  }
+
   // Login logic
   void login() {
     accessOnClick.value = true;
     isLoginLoading.value = true;
 
     Future.delayed(const Duration(seconds: 2), () {
-      print('Login pressed: license=${license.value}, password=${password.value}');
+      print('Login pressed: license=${licenseController.value}, password=${passwordController.value}');
       isLoginLoading.value = false;
 
-      // Show snackbar after login "succeeds"
       Get.snackbar(
         'Login',
         'Login Successful',
@@ -76,7 +89,7 @@ class OrganizerAuthController extends GetxController {
     });
   }
 
-
+  // Register logic
   void register() {
     joinOnClick.value = true;
     isRegisterLoading.value = true;
@@ -84,7 +97,6 @@ class OrganizerAuthController extends GetxController {
     Future.delayed(const Duration(seconds: 2), () {
       print('Register pressed: org=${organizationName.value}, ...');
 
-      // Show success message
       Get.snackbar(
         'Registration',
         'Account created successfully!',
@@ -95,13 +107,34 @@ class OrganizerAuthController extends GetxController {
         duration: const Duration(seconds: 2),
       );
 
-      // Navigate after showing snackbar
       toggleLogin(true);
-
-
       isRegisterLoading.value = false;
     });
   }
 
+  /// Reset all fields
+  Future<void> reset({int delay = 500}) async {
+    await Future.delayed(Duration(milliseconds: delay));
 
+    // Clear TextEditingControllers
+    licenseController.clear();
+    passwordController.clear();
+    organizationNameController.clear();
+    fullNameController.clear();
+    emailController.clear();
+    phoneController.clear();
+    setPasswordController.clear();
+    confirmPasswordController.clear();
+
+    // Reset toggles
+    loginPasswordVisible.value = false;
+    registerPasswordVisible.value = false;
+    registerConfirmPasswordVisible.value = false;
+
+    // Reset other states
+    accessOnClick.value = false;
+    joinOnClick.value = false;
+    isLoginLoading.value = false;
+    isRegisterLoading.value = false;
+  }
 }

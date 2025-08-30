@@ -1,8 +1,7 @@
-// lib/controllers/splash_controller.dart
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {
-  /// Reactive animation values
   var scale = 0.0.obs;
   var opacity = 0.0.obs;
 
@@ -10,14 +9,14 @@ class SplashController extends GetxController {
   void onInit() {
     super.onInit();
 
-    // Start animation after a short delay
-    Future.delayed(200.milliseconds, () {
-      scale.value = 1.0;   // natural size
-      opacity.value = 1.0; // fully visible
+    // Start animation immediately
+    Future.delayed(100.milliseconds, () {
+      scale.value = 1.0;
+      opacity.value = 1.0;
     });
 
-    // Navigate after animation is complete
-    Future.delayed(2400.milliseconds, () {
+    // Navigate 1 second after full scale is reached
+    Future.delayed(2100.milliseconds, () { // animation duration + 1s pause
       Get.offAllNamed('/loginScreen');
     });
   }

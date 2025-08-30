@@ -53,9 +53,24 @@ class setNewPasswordScreen extends StatelessWidget {
                     style: TextStyle(color: Color(0xFFB0B0B0)),
                   ),
                   const SizedBox(height: 6),
-                  costomFormField(
-                    hintText: 'Create a secure password',
-                    onChanged: (value) {},
+                  Obx(
+                    () => CustomFormField(
+                      hintText: 'Create a secure password',
+                      obscureText: !controller.isPasswordVisible.value,
+                      prefixIcon: Icons.lock_outline,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          controller.isPasswordVisible.value
+                              ? Icons.visibility_outlined
+                              : Icons.visibility_off_outlined,
+                          color: controller.isPasswordVisible.value
+                              ? Colors.white
+                              : Colors.grey,
+                        ),
+                        onPressed: controller.togglePasswordVisibility,
+                      ),
+                      controller: controller.passwordController,
+                    ),
                   ),
                   const SizedBox(height: 18),
                   const Text(
@@ -63,10 +78,24 @@ class setNewPasswordScreen extends StatelessWidget {
                     style: TextStyle(color: Color(0xFFB0B0B0)),
                   ),
                   const SizedBox(height: 6),
-                  costomFormField(
-                    hintText: 'Re-enter your password',
-                    obscureText: true,
-                    onChanged: (value) {},
+                  Obx(
+                    () => CustomFormField(
+                      hintText: 'Re-enter your password',
+                      obscureText: !controller.isConfirmPasswordVisible.value,
+                      prefixIcon: Icons.lock_outline,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          controller.isConfirmPasswordVisible.value
+                              ? Icons.visibility_outlined
+                              : Icons.visibility_off_outlined,
+                          color: controller.isConfirmPasswordVisible.value
+                              ? Colors.white
+                              : Colors.grey,
+                        ),
+                        onPressed: controller.toggleConfirmPasswordVisibility,
+                      ),
+                      controller: controller.confirmPassword,
+                    ),
                   ),
                   const SizedBox(height: 28),
                   Obx(
@@ -86,7 +115,10 @@ class setNewPasswordScreen extends StatelessWidget {
                             ? SizedBox(
                                 height: 24,
                                 width: 24,
-                                child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFF141414)),
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: Color(0xFF141414),
+                                ),
                               )
                             : Text(
                                 'Next',
